@@ -18,7 +18,7 @@ public class MemberDAO implements I_MemberDAO {
     private static final String MySQL_DRIVER = "com.mysql.jdbc.Driver";
     private static final String URL_PATH = "jdbc:mysql://localhost:3306/core_health";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "admin";
 
     private static final String RETRIEVE_ALL_MEMBERS =
             "SELECT * " +

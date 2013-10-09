@@ -1,7 +1,14 @@
 
 package corehealth;
 
+import dbaccess.DataAccessException;
+import dbaccess.Member;
+import dbaccess.MemberService;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
@@ -36,6 +43,8 @@ public class CourseWindow extends javax.swing.JFrame {
         txtMemberId = new javax.swing.JTextField();
         txtCourseId = new javax.swing.JTextField();
         btnSignUp = new javax.swing.JButton();
+        btnClearMemberId = new javax.swing.JButton();
+        btnClearCourseId = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ez Swipe 1.0");
@@ -63,25 +72,44 @@ public class CourseWindow extends javax.swing.JFrame {
             }
         });
 
+        btnClearMemberId.setText("Clear");
+        btnClearMemberId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearMemberIdActionPerformed(evt);
+            }
+        });
+
+        btnClearCourseId.setText("Clear");
+        btnClearCourseId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearCourseIdActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(59, 59, 59)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMemberId, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCourseId, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtMemberId, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnClearMemberId))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(61, Short.MAX_VALUE))
+                        .addComponent(txtCourseId, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnClearCourseId)))
+                .addContainerGap(30, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(87, 87, 87))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,12 +117,14 @@ public class CourseWindow extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtMemberId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                    .addComponent(txtMemberId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClearMemberId))
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtCourseId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                    .addComponent(txtCourseId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClearCourseId))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(btnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -121,17 +151,39 @@ public class CourseWindow extends javax.swing.JFrame {
 
     private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
         // TODO add your handling code here:
-        
+
         try {
-        
+
+            final String WEL = "Welcome to Core Health!";
+            final Icon muscle = new ImageIcon("icons/muscle.jpg");
+            final String MAIN_CONFIG = "spring/mainConfig.xml";
+            final String MEM_SERVICE_BEAN = "memberService";
+            final String MEMBER_BEAN = "member";
+            final String SWIPE_BEAN = "swipeWindow";
             
-        String sMemberId = txtMemberId.getText();
-        String sCourseId = txtCourseId.getText();
-        int memberId = Integer.valueOf(sMemberId);
-        int courseId = Integer.valueOf(sCourseId);
-        
-        
-        
+            String sMemberId = txtMemberId.getText();
+            String sCourseId = txtCourseId.getText();
+            int memberId = Integer.valueOf(sMemberId);
+            int courseId = Integer.valueOf(sCourseId);
+            
+            AbstractApplicationContext context
+                    = new ClassPathXmlApplicationContext(new String[] {MAIN_CONFIG});
+
+            MemberService service = (MemberService)context.getBean(MEM_SERVICE_BEAN);
+            Member member = (Member)context.getBean(MEMBER_BEAN);
+
+
+            member = service.getMemberById(sMemberId);
+
+            if (member == null || sMemberId == null) {
+                throw new NullPointerException();
+
+            } else {
+
+                JOptionPane.showMessageDialog(this, "Welcome Back,  " +
+                        member.getFirstName() + " " + member.getLastName() +
+                        "!" , WEL , JOptionPane.PLAIN_MESSAGE, muscle);
+            }
         
         
         
@@ -141,15 +193,29 @@ public class CourseWindow extends javax.swing.JFrame {
 //        } catch (IllegalCourseException ice) {
 //            JOptionPane.showMessageDialog(this, ice.getMessage(), null, JOptionPane.ERROR_MESSAGE);
         } catch (NullPointerException npe) {
-            JOptionPane.showMessageDialog(this, npe.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Invalid. Please See An Employee", null, JOptionPane.WARNING_MESSAGE);
         } catch (IllegalArgumentException iae) {
-            JOptionPane.showMessageDialog(this, iae.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, iae.getMessage(), null, JOptionPane.WARNING_MESSAGE);
+//        } catch (DataAccessException dae) {
+//            JOptionPane.showMessageDialog(this, dae.getMessage(), null, JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.getMessage(), null, JOptionPane.WARNING_MESSAGE);
         }
         
         
     }//GEN-LAST:event_btnSignUpActionPerformed
+
+    private void btnClearMemberIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearMemberIdActionPerformed
+        // TODO add your handling code here:
+        
+        txtMemberId.setText(null);
+    }//GEN-LAST:event_btnClearMemberIdActionPerformed
+
+    private void btnClearCourseIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearCourseIdActionPerformed
+        // TODO add your handling code here:
+        
+        txtCourseId.setText(null);
+    }//GEN-LAST:event_btnClearCourseIdActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -186,6 +252,8 @@ public class CourseWindow extends javax.swing.JFrame {
 //        });
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClearCourseId;
+    private javax.swing.JButton btnClearMemberId;
     private javax.swing.JButton btnSignUp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -45,6 +45,7 @@ public class SwipeWindow extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtMemberId = new javax.swing.JTextField();
         btnSwipeIn = new javax.swing.JButton();
+        btnClearMemberId = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EzSwipe 1.0");
@@ -67,21 +68,30 @@ public class SwipeWindow extends javax.swing.JFrame {
             }
         });
 
+        btnClearMemberId.setText("Clear");
+        btnClearMemberId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearMemberIdActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(33, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(btnSwipeIn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(50, 50, 50)
-                        .addComponent(txtMemberId, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(txtMemberId, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnClearMemberId, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnSwipeIn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,8 +99,9 @@ public class SwipeWindow extends javax.swing.JFrame {
                 .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtMemberId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                    .addComponent(txtMemberId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClearMemberId, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(btnSwipeIn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
         );
@@ -150,18 +161,24 @@ public class SwipeWindow extends javax.swing.JFrame {
             }
 
         } catch (NullPointerException npe) {
-            JOptionPane.showMessageDialog(this, "Please See Employee", null, JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Invalid. Please See An Employee", null, JOptionPane.ERROR_MESSAGE);
         } catch (IllegalArgumentException iae) {
-            JOptionPane.showMessageDialog(this, iae.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, iae.getMessage(), null, JOptionPane.WARNING_MESSAGE);
         } catch (DataAccessException dae) {
             JOptionPane.showMessageDialog(this, dae.getMessage(), null, JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.getMessage(), null, JOptionPane.WARNING_MESSAGE);
         }
         
         txtMemberId.setText(null);
         
     }//GEN-LAST:event_btnSwipeInActionPerformed
+
+    private void btnClearMemberIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearMemberIdActionPerformed
+        // TODO add your handling code here:
+        
+        txtMemberId.setText(null);
+    }//GEN-LAST:event_btnClearMemberIdActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -198,6 +215,7 @@ public class SwipeWindow extends javax.swing.JFrame {
 //        });
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClearMemberId;
     private javax.swing.JButton btnSwipeIn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
