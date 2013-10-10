@@ -18,27 +18,27 @@ USE `core_health1`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `membership_status`
+-- Table structure for table `membership_type`
 --
 
-DROP TABLE IF EXISTS `membership_status`;
+DROP TABLE IF EXISTS `membership_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `membership_status` (
+CREATE TABLE `membership_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `status` varchar(45) DEFAULT NULL,
+  `type` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `membership_status`
+-- Dumping data for table `membership_type`
 --
 
-LOCK TABLES `membership_status` WRITE;
-/*!40000 ALTER TABLE `membership_status` DISABLE KEYS */;
-INSERT INTO `membership_status` VALUES (1,'active'),(2,'terminated'),(3,'hold');
-/*!40000 ALTER TABLE `membership_status` ENABLE KEYS */;
+LOCK TABLES `membership_type` WRITE;
+/*!40000 ALTER TABLE `membership_type` DISABLE KEYS */;
+INSERT INTO `membership_type` VALUES (1,'single'),(2,'family');
+/*!40000 ALTER TABLE `membership_type` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-10  0:35:52
+-- Dump completed on 2013-10-10  1:12:33

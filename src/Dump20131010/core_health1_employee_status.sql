@@ -18,27 +18,27 @@ USE `core_health1`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `employee_role`
+-- Table structure for table `employee_status`
 --
 
-DROP TABLE IF EXISTS `employee_role`;
+DROP TABLE IF EXISTS `employee_status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `employee_role` (
+CREATE TABLE `employee_status` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `role` varchar(45) DEFAULT NULL,
-  `desc` varchar(45) DEFAULT NULL,
+  `status` varchar(45) DEFAULT NULL,
+  `last_updated` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `employee_role`
+-- Dumping data for table `employee_status`
 --
 
-LOCK TABLES `employee_role` WRITE;
-/*!40000 ALTER TABLE `employee_role` DISABLE KEYS */;
-/*!40000 ALTER TABLE `employee_role` ENABLE KEYS */;
+LOCK TABLES `employee_status` WRITE;
+/*!40000 ALTER TABLE `employee_status` DISABLE KEYS */;
+/*!40000 ALTER TABLE `employee_status` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-10  0:35:52
+-- Dump completed on 2013-10-10  1:12:33

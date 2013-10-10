@@ -18,27 +18,37 @@ USE `core_health1`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `employee_status`
+-- Table structure for table `course`
 --
 
-DROP TABLE IF EXISTS `employee_status`;
+DROP TABLE IF EXISTS `course`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `employee_status` (
+CREATE TABLE `course` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `status` varchar(45) DEFAULT NULL,
-  `last_updated` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `instructor_id` int(11) NOT NULL,
+  `type_id` int(11) NOT NULL,
+  `title` varchar(45) DEFAULT NULL,
+  `capacity` int(11) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `start_time` time DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `end_time` time DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_instructor_employee.id_idx` (`instructor_id`),
+  KEY `fk_course_type.id_idx` (`type_id`),
+  CONSTRAINT `fk_course_type.id` FOREIGN KEY (`type_id`) REFERENCES `course_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_instructor_employee.id` FOREIGN KEY (`instructor_id`) REFERENCES `employee` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `employee_status`
+-- Dumping data for table `course`
 --
 
-LOCK TABLES `employee_status` WRITE;
-/*!40000 ALTER TABLE `employee_status` DISABLE KEYS */;
-/*!40000 ALTER TABLE `employee_status` ENABLE KEYS */;
+LOCK TABLES `course` WRITE;
+/*!40000 ALTER TABLE `course` DISABLE KEYS */;
+/*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-10  0:35:52
+-- Dump completed on 2013-10-10  1:12:33

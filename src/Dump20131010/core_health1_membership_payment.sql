@@ -18,36 +18,27 @@ USE `core_health1`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `course`
+-- Table structure for table `membership_payment`
 --
 
-DROP TABLE IF EXISTS `course`;
+DROP TABLE IF EXISTS `membership_payment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `course` (
+CREATE TABLE `membership_payment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `instructor_id` int(11) NOT NULL,
-  `type_id` int(11) NOT NULL,
-  `title` varchar(45) DEFAULT NULL,
-  `start_date` date DEFAULT NULL,
-  `start_time` time DEFAULT NULL,
-  `end_date` date DEFAULT NULL,
-  `end_time` time DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_instructor_employee.id_idx` (`instructor_id`),
-  KEY `fk_course_type.id_idx` (`type_id`),
-  CONSTRAINT `fk_course_type.id` FOREIGN KEY (`type_id`) REFERENCES `course_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_instructor_employee.id` FOREIGN KEY (`instructor_id`) REFERENCES `employee` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `frequency` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `course`
+-- Dumping data for table `membership_payment`
 --
 
-LOCK TABLES `course` WRITE;
-/*!40000 ALTER TABLE `course` DISABLE KEYS */;
-/*!40000 ALTER TABLE `course` ENABLE KEYS */;
+LOCK TABLES `membership_payment` WRITE;
+/*!40000 ALTER TABLE `membership_payment` DISABLE KEYS */;
+INSERT INTO `membership_payment` VALUES (1,'monthly'),(2,'annually');
+/*!40000 ALTER TABLE `membership_payment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -59,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-10  0:35:52
+-- Dump completed on 2013-10-10  1:12:34

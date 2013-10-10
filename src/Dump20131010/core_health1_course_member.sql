@@ -18,27 +18,29 @@ USE `core_health1`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `membership_type`
+-- Table structure for table `course_member`
 --
 
-DROP TABLE IF EXISTS `membership_type`;
+DROP TABLE IF EXISTS `course_member`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `membership_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+CREATE TABLE `course_member` (
+  `member_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  PRIMARY KEY (`member_id`,`course_id`),
+  KEY `fk_course.id_idx` (`course_id`),
+  CONSTRAINT `fk_member.id` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_course.id` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `membership_type`
+-- Dumping data for table `course_member`
 --
 
-LOCK TABLES `membership_type` WRITE;
-/*!40000 ALTER TABLE `membership_type` DISABLE KEYS */;
-INSERT INTO `membership_type` VALUES (1,'single'),(2,'family');
-/*!40000 ALTER TABLE `membership_type` ENABLE KEYS */;
+LOCK TABLES `course_member` WRITE;
+/*!40000 ALTER TABLE `course_member` DISABLE KEYS */;
+/*!40000 ALTER TABLE `course_member` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-10  0:35:52
+-- Dump completed on 2013-10-10  1:12:33
