@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `core_health` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `core_health`;
+CREATE DATABASE  IF NOT EXISTS `core_health1` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `core_health1`;
 -- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
 --
--- Host: localhost    Database: core_health
+-- Host: localhost    Database: core_health1
 -- ------------------------------------------------------
 -- Server version	5.6.14
 
@@ -18,27 +18,27 @@ USE `core_health`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `staff_status`
+-- Table structure for table `membership_status`
 --
 
-DROP TABLE IF EXISTS `staff_status`;
+DROP TABLE IF EXISTS `membership_status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `staff_status` (
-  `id` varchar(5) NOT NULL,
+CREATE TABLE `membership_status` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `status` varchar(45) DEFAULT NULL,
-  `last_updated` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `staff_status`
+-- Dumping data for table `membership_status`
 --
 
-LOCK TABLES `staff_status` WRITE;
-/*!40000 ALTER TABLE `staff_status` DISABLE KEYS */;
-/*!40000 ALTER TABLE `staff_status` ENABLE KEYS */;
+LOCK TABLES `membership_status` WRITE;
+/*!40000 ALTER TABLE `membership_status` DISABLE KEYS */;
+INSERT INTO `membership_status` VALUES (1,'active'),(2,'terminated'),(3,'hold');
+/*!40000 ALTER TABLE `membership_status` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-01 22:10:28
+-- Dump completed on 2013-10-10  0:35:52

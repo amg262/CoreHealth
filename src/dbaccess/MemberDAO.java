@@ -16,7 +16,7 @@ public class MemberDAO implements I_MemberDAO {
     
     private I_DBAccessor db;
     private static final String MySQL_DRIVER = "com.mysql.jdbc.Driver";
-    private static final String URL_PATH = "jdbc:mysql://localhost:3306/core_health";
+    private static final String URL_PATH = "jdbc:mysql://localhost:3306/core_health1";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "admin";
 
@@ -73,9 +73,22 @@ public class MemberDAO implements I_MemberDAO {
         for (Map map : rawData) {
             member = new Member();
             
-            String memberId = map.get("member_id").toString();
-            member.setMemberId(new Integer(memberId));
+            String id = map.get("id").toString();
+            member.setId(new Integer(id));
             
+            String memType = map.get("mem_type").toString();
+            member.setMemType(new Integer(memType));
+
+            String freeSession = map.get("free_session").toString();
+            member.setFreeSession(new Integer(freeSession));
+            
+            String memPayment = map.get("mem_payment").toString();
+            member.setMemPayment(new Integer(memPayment));
+                        
+            String memStatus = map.get("mem_status").toString();
+            member.setMemStatus(new Integer(memStatus));
+            
+                        
             String lastName = map.get("last_name").toString();
             member.setLastName(lastName);
             
@@ -103,17 +116,7 @@ public class MemberDAO implements I_MemberDAO {
             Date joinDate = (Date)map.get("join_date");
             member.setJoinDate(joinDate);
             
-            String membershipType = map.get("membership_type").toString();
-            member.setMembershipType(membershipType);
             
-            String membershipStatus = map.get("membership_status").toString();
-            member.setMembershipStatus(membershipStatus);
-            
-            String membershipPayment = map.get("membership_payment").toString();
-            member.setMembershipPayment(membershipPayment);
-            
-            String freeSession = map.get("free_session").toString();
-            member.setFreeSession(freeSession);
             
             records.add(member);
         }
@@ -122,15 +125,14 @@ public class MemberDAO implements I_MemberDAO {
     }
 
     @Override
-    public Member retreiveMemberById(String memberId) throws DataAccessException {
+    public Member retreiveMemberById(String id) throws DataAccessException {
         this.openLocalDBConnection();
         
         Map record;
         
         try {
-            record = db.retrieveRecordByID("member", "member_id",
-                                            new Integer(memberId), true);
-            
+            record = db.retrieveRecordByID("member", "id",
+                                            new Integer(id), true);  
         } catch (SQLException sqle){
             throw new DataAccessException(sqle.getMessage(), sqle);
         } catch (Exception e) {
@@ -139,7 +141,12 @@ public class MemberDAO implements I_MemberDAO {
         
         Member member = new Member();
         
-        member.setMemberId(new Integer(record.get("member_id").toString()));
+        member.setId(new Integer(record.get("id").toString()));
+        member.setMemType(new Integer(record.get("mem_type").toString()));
+        member.setFreeSession(new Integer(record.get("free_session").toString()));
+        member.setMemPayment(new Integer(record.get("mem_payment").toString()));
+        member.setMemStatus(new Integer(record.get("mem_status").toString()));
+        
         member.setLastName(record.get("last_name").toString());
         member.setFirstName(record.get("first_name").toString());
         member.setAddress(record.get("address").toString());
@@ -152,10 +159,6 @@ public class MemberDAO implements I_MemberDAO {
         Date joinDate = (Date)record.get("join_date");
         member.setJoinDate(joinDate);
         
-        member.setMembershipType(record.get("membership_type").toString());
-        member.setMembershipStatus(record.get("membership_status").toString());
-        member.setMembershipPayment(record.get("membership_payment").toString());
-        member.setFreeSession(record.get("free_session").toString());
         
         
         return member;
@@ -170,6 +173,10 @@ public class MemberDAO implements I_MemberDAO {
         String tableName = "member";
         
         fields = new ArrayList<>();
+        fields.add("mem_type");
+        fields.add("free_session");
+        fields.add("mem_payment");
+        fields.add("mem_status");
         fields.add("last_name");
         fields.add("first_name");
         fields.add("address");
@@ -179,13 +186,15 @@ public class MemberDAO implements I_MemberDAO {
         fields.add("phone");
         fields.add("email");
         fields.add("join_date");
-        fields.add("membership_type");
-        fields.add("membership_status");
-        fields.add("membership_payment");
-        fields.add("free_session");
+        
+        
         
         
         values = new ArrayList();
+        values.add(member.getMemType());
+        values.add(member.getFreeSession());
+        values.add(member.getMemPayment());
+        values.add(member.getMemStatus());
         values.add(member.getFirstName());
         values.add(member.getLastName());
         values.add(member.getAddress());
@@ -195,17 +204,15 @@ public class MemberDAO implements I_MemberDAO {
         values.add(member.getPhone());
         values.add(member.getEmail());
         values.add(member.getJoinDate());
-        values.add(member.getMembershipType());
-        values.add(member.getMembershipStatus());
-        values.add(member.getMembershipPayment());
-        values.add(member.getFreeSession());
+        
+        
         
         try {
-            if (member.getMemberId() == 0){
+            if (member.getId() == 0){
                 db.insertRecord(tableName, fields, values, true);
                 
             } else {
-                db.updateRecords(tableName, fields, values, "member_id", member.getMemberId(), true);
+                db.updateRecords(tableName, fields, values, "id", member.getId(), true);
             }
             
         } catch (SQLException sqle){
@@ -220,11 +227,20 @@ public class MemberDAO implements I_MemberDAO {
         this.openLocalDBConnection();
         
         try {
-            db.deleteRecords("member", "member_id", member.getMemberId(), true);
+            db.deleteRecords("member", "id", member.getId(), true);
         } catch (SQLException sqle){
             throw new DataAccessException(sqle.getMessage(), sqle);
         } catch (Exception e) {
             throw new DataAccessException(e.getMessage(), e);
         }
+    }
+    
+    public static void main(String[] args) throws DataAccessException {
+        
+        MemberDAO dao = new MemberDAO(new DBAccessor());
+        
+        dao.openLocalDBConnection();
+        System.out.println(dao.retrieveAllMemebers());
+        
     }
 }

@@ -11,7 +11,11 @@ import java.util.Date;
  */
 public class Member {
     
-    private int memberId;
+    private int id;
+    private int memType;
+    private int freeSession;
+    private int memStatus;
+    private int memPayment;
     private String lastName;
     private String firstName;
     private String address;
@@ -21,29 +25,28 @@ public class Member {
     private String phone;
     private String email;
     private Date joinDate;
-    private String membershipType;
-    private String membershipStatus;
-    private String membershipPayment;
-    private String freeSession;
-    
-    
-    /**
-     *
-     */
-    public Member() {}
 
-    
     /**
      *
-     * @param memberId
      */
-    public Member(int memberId) {
-        this.memberId = memberId;
+    public Member() {
     }
 
     /**
      *
-     * @param memberId
+     * @param id
+     */
+    public Member(int id) {
+        this.id = id;
+    }
+
+    /**
+     *
+     * @param id
+     * @param memType
+     * @param freeSession
+     * @param memStatus
+     * @param memPayment
      * @param lastName
      * @param firstName
      * @param address
@@ -53,17 +56,17 @@ public class Member {
      * @param phone
      * @param email
      * @param joinDate
-     * @param membershipType
-     * @param membershipStatus
-     * @param membershipPayment
-     * @param freeSession
      */
-    public Member(int memberId, String lastName, String firstName, String address,
-            String city, String state, String zip, String phone, String email,
-            Date joinDate, String membershipType, String membershipStatus,
-            String membershipPayment, String freeSession) {
+    public Member(int id, int memType, int freeSession,int memPayment, int memStatus,
+            String lastName, String firstName,
+            String address, String city, String state, String zip,
+            String phone, String email, Date joinDate) {
         
-        this.memberId = memberId;
+        this.id = id;
+        this.memType = memType;
+        this.freeSession = freeSession;
+        this.memStatus = memStatus;
+        this.memPayment = memPayment;
         this.lastName = lastName;
         this.firstName = firstName;
         this.address = address;
@@ -73,24 +76,76 @@ public class Member {
         this.phone = phone;
         this.email = email;
         this.joinDate = joinDate;
-        this.membershipType = membershipType;
-        this.membershipStatus = membershipStatus;
-        this.membershipPayment = membershipPayment;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the memType
+     */
+    public int getMemType() {
+        return memType;
+    }
+
+    /**
+     * @param memType the memType to set
+     */
+    public void setMemType(int memType) {
+        this.memType = memType;
+    }
+
+    /**
+     * @return the freeSession
+     */
+    public int getFreeSession() {
+        return freeSession;
+    }
+
+    /**
+     * @param freeSession the freeSession to set
+     */
+    public void setFreeSession(int freeSession) {
         this.freeSession = freeSession;
     }
 
     /**
-     * @return the memberId
+     * @return the memStatus
      */
-    public int getMemberId() {
-        return memberId;
+    public int getMemStatus() {
+        return memStatus;
     }
 
     /**
-     * @param memberId the memberId to set
+     * @param memStatus the memStatus to set
      */
-    public void setMemberId(int memberId) {
-        this.memberId = memberId;
+    public void setMemStatus(int memStatus) {
+        this.memStatus = memStatus;
+    }
+
+    /**
+     * @return the memPayment
+     */
+    public int getMemPayment() {
+        return memPayment;
+    }
+
+    /**
+     * @param memPayment the memPayment to set
+     */
+    public void setMemPayment(int memPayment) {
+        this.memPayment = memPayment;
     }
 
     /**
@@ -220,69 +275,13 @@ public class Member {
     }
 
     /**
-     * @return the membershipType
-     */
-    public String getMembershipType() {
-        return membershipType;
-    }
-
-    /**
-     * @param membershipType the membershipType to set
-     */
-    public void setMembershipType(String membershipType) {
-        this.membershipType = membershipType;
-    }
-
-    /**
-     * @return the membershipStatus
-     */
-    public String getMembershipStatus() {
-        return membershipStatus;
-    }
-
-    /**
-     * @param membershipStatus the membershipStatus to set
-     */
-    public void setMembershipStatus(String membershipStatus) {
-        this.membershipStatus = membershipStatus;
-    }
-
-    /**
-     * @return the membershipPayment
-     */
-    public String getMembershipPayment() {
-        return membershipPayment;
-    }
-
-    /**
-     * @param membershipPayment the membershipPayment to set
-     */
-    public void setMembershipPayment(String membershipPayment) {
-        this.membershipPayment = membershipPayment;
-    }
-
-    /**
-     * @return the freeSession
-     */
-    public String getFreeSession() {
-        return freeSession;
-    }
-
-    /**
-     * @param freeSession the freeSession to set
-     */
-    public void setFreeSession(String freeSession) {
-        this.freeSession = freeSession;
-    }
-
-    /**
      *
      * @return
      */
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + this.memberId;
+        int hash = 5;
+        hash = 59 * hash + this.id;
         return hash;
     }
 
@@ -300,7 +299,7 @@ public class Member {
             return false;
         }
         final Member other = (Member) obj;
-        if (this.memberId != other.memberId) {
+        if (this.id != other.id) {
             return false;
         }
         return true;
@@ -312,19 +311,25 @@ public class Member {
      */
     @Override
     public String toString() {
-        return "\nMember\n{" +
-                "\nmemberId:  " + memberId + "\nlastName:  " + lastName +
-                "\nfirstName:  " + firstName + "\naddress:  " + address +
-                "\ncity:  " + city + "\nstate:  " + state + "\nzip:  " + zip +
-                "\nphone:  " + phone + "\nemail: " + email +
-                "\njoinDate:  " + joinDate + "\nmem_Type:  " + membershipType +
-                "\nmem_Status:  " + membershipStatus +
-                "\nmem_Payment:  " + membershipPayment +
-                "\nfreeSession:  " + freeSession + "\n}\n";
+        return "\nMember\n{\n" +
+                "id: " + id +
+                "\nmemType: " + memType +
+                "\nfreeSession: " + freeSession +
+                "\nmemPayment: " + memPayment +
+                "\nmemStatus: " + memStatus +
+                "\nlastName: " + lastName +
+                "\nfirstName: " + firstName +
+                "\naddress: " + address +
+                "\ncity: " + city +
+                "\nstate: " + state +
+                "\nzip: " + zip +
+                "\nphone: " + phone +
+                "\nemail: " + email +
+                "\njoinDate: " + joinDate +
+                "\n}\n";
     }
 
     
     
-
-
+    
 }

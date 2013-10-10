@@ -26,11 +26,11 @@ public interface I_MemberDAO {
     
     /**
      *
-     * @param memberId
+     * @param id 
      * @return
      * @throws DataAccessException
      */
-    public abstract Member retreiveMemberById(String memberId) throws DataAccessException;
+    public abstract Member retreiveMemberById(String id) throws DataAccessException;
     
     /**
      *

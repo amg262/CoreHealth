@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `core_health` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `core_health`;
+CREATE DATABASE  IF NOT EXISTS `core_health1` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `core_health1`;
 -- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
 --
--- Host: localhost    Database: core_health
+-- Host: localhost    Database: core_health1
 -- ------------------------------------------------------
 -- Server version	5.6.14
 
@@ -18,27 +18,29 @@ USE `core_health`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `membership_status`
+-- Table structure for table `course_member`
 --
 
-DROP TABLE IF EXISTS `membership_status`;
+DROP TABLE IF EXISTS `course_member`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `membership_status` (
-  `id` varchar(5) NOT NULL,
-  `status` varchar(25) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `course_member` (
+  `member_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  PRIMARY KEY (`member_id`,`course_id`),
+  KEY `fk_course.id_idx` (`course_id`),
+  CONSTRAINT `fk_member.id` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_course.id` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `membership_status`
+-- Dumping data for table `course_member`
 --
 
-LOCK TABLES `membership_status` WRITE;
-/*!40000 ALTER TABLE `membership_status` DISABLE KEYS */;
-INSERT INTO `membership_status` VALUES ('1act','active'),('1hol','on-hold'),('1ter','terminated');
-/*!40000 ALTER TABLE `membership_status` ENABLE KEYS */;
+LOCK TABLES `course_member` WRITE;
+/*!40000 ALTER TABLE `course_member` DISABLE KEYS */;
+/*!40000 ALTER TABLE `course_member` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-01 22:10:27
+-- Dump completed on 2013-10-10  0:35:52
