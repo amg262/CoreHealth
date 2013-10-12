@@ -328,7 +328,7 @@ public class MemberDAO implements I_MemberDAO {
         List<Member> members = new ArrayList();
         dao.openLocalDBConnection();
         //System.out.println(dao.retrieveAllMemebers());
-        members = dao.retrieveMemberByKeyword("White");
+        members = dao.retrieveMemberByKeyword("white");
         System.out.println(members.toString());
         
         

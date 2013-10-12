@@ -21,7 +21,7 @@ public interface I_CourseDAO {
      * @returnp
      * @throws DataAccessException
      */
-    public abstract List<Course> retrieveAllCourse() throws DataAccessException;
+    public abstract List<Course> retrieveAllCourses() throws DataAccessException;
     
     /**
      *
