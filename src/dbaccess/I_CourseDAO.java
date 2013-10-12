@@ -5,11 +5,9 @@ import java.util.List;
 
 /**
  *
- * Interface that states methods the MenuDAO will have to implement
- * 
  * @author Andrew Gunn | amgunn1@hotmail.com
  */
-public interface I_MemberDAO {
+public interface I_CourseDAO {
     
     /**
      *
@@ -23,7 +21,7 @@ public interface I_MemberDAO {
      * @returnp
      * @throws DataAccessException
      */
-    public abstract List<Member> retrieveAllMemebers() throws DataAccessException;
+    public abstract List<Course> retrieveAllCourse() throws DataAccessException;
     
     /**
      *
@@ -31,7 +29,7 @@ public interface I_MemberDAO {
      * @return
      * @throws DataAccessException
      */
-    public abstract Member retreiveMemberById(String id) throws DataAccessException;
+    public abstract Course retreiveCourseById(String id) throws DataAccessException;
     
     
     /**
@@ -40,20 +38,20 @@ public interface I_MemberDAO {
      * @return
      * @throws DataAccessException
      */
-    public abstract List<Member> retrieveMemberByKeyword(String keyword) throws DataAccessException;
+    public abstract List<Course> retrieveCourseByKeyword(String keyword) throws DataAccessException;
     
     /**
      *
-     * @param member
+     * @param course 
      * @throws DataAccessException
      */
-    public abstract void saveMember(Member member) throws DataAccessException;
+    public abstract void saveCourse(Course course) throws DataAccessException;
     
     /**
      *
-     * @param member
+     * @param course 
      * @throws DataAccessException
      */
-    public abstract void deleteMember(Member member) throws DataAccessException;
-    
+    public abstract void deleteCourse(Course course) throws DataAccessException;
+
 }

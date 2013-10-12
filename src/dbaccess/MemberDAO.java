@@ -87,8 +87,7 @@ public class MemberDAO implements I_MemberDAO {
                         
             String memStatus = map.get("mem_status").toString();
             member.setMemStatus(new Integer(memStatus));
-            
-                        
+                      
             String lastName = map.get("last_name").toString();
             member.setLastName(lastName);
             
@@ -163,6 +162,89 @@ public class MemberDAO implements I_MemberDAO {
         
         return member;
     }
+    
+    /**
+     *
+     * @param keyword
+     * @return
+     * @throws DataAccessException
+     */
+    @Override
+    public List<Member> retrieveMemberByKeyword(String keyword) throws DataAccessException {
+        
+        final String GET_MEMBER_BY_KEYWORD = 
+            "SELECT * " +
+            "FROM member " +
+            "WHERE member.last_name like '%" + keyword + "%' " + 
+                " or member.first_name like '%" + keyword + "%' ; ";
+        
+        List<Map> rawData = new ArrayList<>();
+        List<Member> records = new ArrayList<>();
+        
+        try {
+            rawData = db.retrieveRecords(GET_MEMBER_BY_KEYWORD, true);
+        } catch (SQLException sqle){
+            throw new DataAccessException (sqle.getMessage(), sqle);
+        } catch (Exception e){
+            throw new DataAccessException (e.getMessage(), e);
+        }
+        
+        Member member = null;
+        
+        for (Map map : rawData) {
+            member = new Member();
+            
+            String id = map.get("id").toString();
+            member.setId(new Integer(id));
+            
+            String memType = map.get("mem_type").toString();
+            member.setMemType(new Integer(memType));
+
+            String freeSession = map.get("free_session").toString();
+            member.setFreeSession(new Integer(freeSession));
+            
+            String memPayment = map.get("mem_payment").toString();
+            member.setMemPayment(new Integer(memPayment));
+                        
+            String memStatus = map.get("mem_status").toString();
+            member.setMemStatus(new Integer(memStatus));
+                      
+            String lastName = map.get("last_name").toString();
+            member.setLastName(lastName);
+            
+            String firstName = map.get("first_name").toString();
+            member.setFirstName(firstName);
+            
+            String address = map.get("address").toString();
+            member.setAddress(address);
+            
+            String city = map.get("city").toString();
+            member.setCity(city);
+            
+            String state = map.get("state").toString();
+            member.setState(state);
+            
+            String zip = map.get("zip").toString();
+            member.setZip(zip);
+            
+            String phone = map.get("phone").toString();
+            member.setPhone(phone);
+            
+            String email = map.get("email").toString();
+            member.setEmail(email);
+            
+            Date joinDate = (Date)map.get("join_date");
+            member.setJoinDate(joinDate);
+            
+            
+            
+            records.add(member);
+            
+        }
+        return records;
+    }
+    
+    
 
     @Override
     public void saveMember(Member member) throws DataAccessException {
@@ -235,12 +317,20 @@ public class MemberDAO implements I_MemberDAO {
         }
     }
     
+    /**
+     *
+     * @param args
+     * @throws DataAccessException
+     */
     public static void main(String[] args) throws DataAccessException {
         
         MemberDAO dao = new MemberDAO(new DBAccessor());
-        
+        List<Member> members = new ArrayList();
         dao.openLocalDBConnection();
-        System.out.println(dao.retrieveAllMemebers());
+        //System.out.println(dao.retrieveAllMemebers());
+        members = dao.retrieveMemberByKeyword("White");
+        System.out.println(members.toString());
+        
         
     }
 }
