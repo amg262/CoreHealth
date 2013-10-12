@@ -285,7 +285,7 @@ public class CourseDAO implements I_CourseDAO {
         
         dao.openLocalDBConnection();
         //System.out.println(dao.retrieveAllCourses());
-        courses = dao.retrieveCourseByKeyword("karate");
+        courses = dao.retrieveCourseByKeyword("defense");
         System.out.println(courses.toString());
     }
 
