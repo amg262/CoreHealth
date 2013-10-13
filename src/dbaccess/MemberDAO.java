@@ -180,7 +180,8 @@ public class MemberDAO implements I_MemberDAO {
                 " join membership_payment on member.mem_payment = membership_payment.id " +
                 " join membership_type on member.mem_type = membership_type.id " +
                 " join free_session on member.free_session = free_session.id " +
-                " WHERE member.id = " + keyword +
+                " WHERE member.last_name like '%" + keyword + "%' " +
+                " or member.first_name like '%" + keyword + "%' " +
                 " order by member.id ";
          
         List<Map> rawData = new ArrayList<>();
@@ -394,7 +395,7 @@ public class MemberDAO implements I_MemberDAO {
         //System.out.println(dao.retrieveAllMemebers());
 //        members = dao.retrieveMemberByKeyword("white");
 //        System.out.println(members.toString());
-        System.out.println(dao.retreiveMemberInfo("2"));
+        System.out.println(dao.retreiveMemberInfo("a"));
         
         
     }
