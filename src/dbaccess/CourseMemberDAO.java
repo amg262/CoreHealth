@@ -178,8 +178,8 @@ public class CourseMemberDAO implements I_CourseMemberDAO {
         CourseMember cm = new CourseMember();
         
         dao.openLocalDBConnection();
-        cm.setMemberId(4);
-        cm.setCourseId(6);
+        cm.setMemberId(3);
+        cm.setCourseId(10);
         dao.deleteCourseMember(cm);
         
         System.out.println(cm.toString());

@@ -208,7 +208,8 @@ public class CourseWindow extends javax.swing.JFrame {
             courseMemServ.saveCourseMember(courseMem);
 
 
-                JOptionPane.showMessageDialog(this, "Thank you " + member.getFirstName() +
+                JOptionPane.showMessageDialog(this, "Thank you, " + member.getFirstName() +
+                        " " + member.getLastName() +
                         "\nCourse: " + course.getTitle() +
                         "\nDates: " + course.getStartDate() +  "  to  " + course.getEndDate() +
                         "\nTime: " + course.getStartTime() + "  to  " + course.getEndTime() 
