@@ -5,6 +5,12 @@ import dbaccess.DataAccessException;
 import dbaccess.Member;
 import dbaccess.MemberService;
 import java.awt.image.ImageObserver;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -12,6 +18,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 /**
  *
@@ -30,6 +38,33 @@ public class SwipeWindow extends javax.swing.JFrame {
      */
     public SwipeWindow() {
         initComponents();
+    }
+    
+    private static void playWinning(){
+        
+        try {
+            String winningSong = "C:\\Users\\Andy\\Desktop\\CoreHealth\\CoreHealth\\CoreHealth\\src\\sounds\\winningSound.wav";
+
+
+            InputStream in = new FileInputStream(winningSong);
+            AudioStream as = new AudioStream(in);
+            AudioPlayer.player.start(as);
+        } catch (Exception e){
+            
+        }
+    }
+    
+    private static void playLosing(){
+        
+        try {
+            String losingHorn = "C:\\Users\\Andy\\Desktop\\CoreHealth\\CoreHealth\\CoreHealth\\src\\sounds\\losingHorn.wav";
+
+            InputStream in = new FileInputStream(losingHorn);
+            AudioStream as = new AudioStream(in);
+            AudioPlayer.player.start(as);
+        } catch (Exception e){
+            
+        }
     }
 
     /**
@@ -131,6 +166,9 @@ public class SwipeWindow extends javax.swing.JFrame {
         
         try {
 
+            String winningSong = "C:\\Users\\Andy\\Desktop\\CoreHealth\\CoreHealth\\CoreHealth\\src\\sounds\\winningSound.wav";
+            String losingHorn = "C:\\Users\\Andy\\Desktop\\CoreHealth\\CoreHealth\\CoreHealth\\src\\sounds\\losingHorn.wav";
+            
             final String WEL = "Welcome to Core Health!";
             final Icon muscle = new ImageIcon("icons/muscle.jpg");
             final String MAIN_CONFIG = "spring/mainConfig.xml";
@@ -155,18 +193,24 @@ public class SwipeWindow extends javax.swing.JFrame {
 
             } else {
 
+                playWinning();
+                
                 JOptionPane.showMessageDialog(this, "Welcome Back,  " +
                         member.getFirstName() + " " + member.getLastName() +
                         "!" , WEL , JOptionPane.PLAIN_MESSAGE, muscle);
             }
 
         } catch (NullPointerException npe) {
+            playLosing();
             JOptionPane.showMessageDialog(this, "Invalid. Please See An Employee", null, JOptionPane.ERROR_MESSAGE);
         } catch (IllegalArgumentException iae) {
+            playLosing();
             JOptionPane.showMessageDialog(this, iae.getMessage(), null, JOptionPane.WARNING_MESSAGE);
         } catch (DataAccessException dae) {
+            playLosing();
             JOptionPane.showMessageDialog(this, dae.getMessage(), null, JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
+            playLosing();
             JOptionPane.showMessageDialog(this, e.getMessage(), null, JOptionPane.WARNING_MESSAGE);
         }
         
