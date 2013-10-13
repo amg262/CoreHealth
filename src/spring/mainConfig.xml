@@ -13,6 +13,12 @@
     
     <bean id="swipeWindow" class="corehealth.SwipeWindow" />
     <bean id="courseWindow" class="corehealth.CourseWindow" />
-    <bean id="memberService" class="dbaccess.MemberService" />
+    
     <bean id="member" class="dbaccess.Member" />
+    <bean id="course" class="dbaccess.Course" />
+    <bean id="courseMember" class="dbaccess.CourseMember" />
+    
+    <bean id="memberService" class="dbaccess.MemberService" />
+    <bean id="courseService" class="dbaccess.CourseService" />
+    <bean id="courseMemberService" class="dbaccess.CourseMemberService" />
 </beans>

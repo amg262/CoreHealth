@@ -134,7 +134,7 @@ public class SwipeWindow extends javax.swing.JFrame {
             final String WEL = "Welcome to Core Health!";
             final Icon muscle = new ImageIcon("icons/muscle.jpg");
             final String MAIN_CONFIG = "spring/mainConfig.xml";
-            final String MEM_SERVICE_BEAN = "memberService";
+            final String MEMBER_SERV_BEAN = "memberService";
             final String MEMBER_BEAN = "member";
             final String SWIPE_BEAN = "swipeWindow";
             
@@ -144,7 +144,7 @@ public class SwipeWindow extends javax.swing.JFrame {
             AbstractApplicationContext context
                     = new ClassPathXmlApplicationContext(new String[] {MAIN_CONFIG});
 
-            MemberService service = (MemberService)context.getBean(MEM_SERVICE_BEAN);
+            MemberService service = (MemberService)context.getBean(MEMBER_SERV_BEAN);
             Member member = (Member)context.getBean(MEMBER_BEAN);
 
 

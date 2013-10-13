@@ -1,6 +1,10 @@
 
 package corehealth;
 
+import dbaccess.Course;
+import dbaccess.CourseMember;
+import dbaccess.CourseMemberService;
+import dbaccess.CourseService;
 import dbaccess.DataAccessException;
 import dbaccess.Member;
 import dbaccess.MemberService;
@@ -151,14 +155,21 @@ public class CourseWindow extends javax.swing.JFrame {
 
     private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
         // TODO add your handling code here:
-
+ 
         try {
 
             final String WEL = "Welcome to Core Health!";
             final Icon muscle = new ImageIcon("icons/muscle.jpg");
             final String MAIN_CONFIG = "spring/mainConfig.xml";
+            
             final String MEM_SERVICE_BEAN = "memberService";
+            final String COURSE_SERV_BEAN = "courseService";
+            final String COURSE_MEM_SERV_BEAN = "courseMemberService";
+            
             final String MEMBER_BEAN = "member";
+            final String COURSE_BEAN = "course";
+            final String COURSE_MEM_BEAN = "courseMember";
+            
             final String SWIPE_BEAN = "swipeWindow";
             
             String sMemberId = txtMemberId.getText();
@@ -168,36 +179,44 @@ public class CourseWindow extends javax.swing.JFrame {
             
             AbstractApplicationContext context
                     = new ClassPathXmlApplicationContext(new String[] {MAIN_CONFIG});
-
-            MemberService service = (MemberService)context.getBean(MEM_SERVICE_BEAN);
+            
+            MemberService memServ = (MemberService)context.getBean(MEM_SERVICE_BEAN);
+            CourseService courseServ = (CourseService)context.getBean(COURSE_SERV_BEAN);
+            CourseMemberService courseMemServ = 
+                    (CourseMemberService)context.getBean(COURSE_MEM_SERV_BEAN);
+            
+            
             Member member = (Member)context.getBean(MEMBER_BEAN);
+            Course course = (Course)context.getBean(COURSE_BEAN);
+            CourseMember courseMem = (CourseMember)context.getBean(COURSE_MEM_BEAN);
 
-
-            member = service.getMemberById(sMemberId);
-
-            if (member == null || sMemberId == null) {
+            
+            if (member == null || sMemberId == null ||
+                    course == null || sCourseId == null){
+                
                 throw new NullPointerException();
-
+                
             } else {
+                
+            member = memServ.getMemberById(sMemberId);
+            course = courseServ.getCourseById(sCourseId);
+
 
                 JOptionPane.showMessageDialog(this, "Welcome Back,  " +
                         member.getFirstName() + " " + member.getLastName() +
                         "!" , WEL , JOptionPane.PLAIN_MESSAGE, muscle);
+            
+            System.out.println(courseServ.getCourseById(sCourseId));
+        
             }
+            
         
-        
-        
-//        For later
-//        } catch (IllegalMemberException ime) {
-//            JOptionPane.showMessageDialog(this, ime.getMessage(), null, JOptionPane.ERROR_MESSAGE);
-//        } catch (IllegalCourseException ice) {
-//            JOptionPane.showMessageDialog(this, ice.getMessage(), null, JOptionPane.ERROR_MESSAGE);
         } catch (NullPointerException npe) {
             JOptionPane.showMessageDialog(this, "Invalid. Please See An Employee", null, JOptionPane.WARNING_MESSAGE);
         } catch (IllegalArgumentException iae) {
             JOptionPane.showMessageDialog(this, iae.getMessage(), null, JOptionPane.WARNING_MESSAGE);
-//        } catch (DataAccessException dae) {
-//            JOptionPane.showMessageDialog(this, dae.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+        } catch (DataAccessException dae) {
+            JOptionPane.showMessageDialog(this, dae.getMessage(), null, JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), null, JOptionPane.WARNING_MESSAGE);
         }

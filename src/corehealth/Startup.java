@@ -31,7 +31,7 @@ public class Startup {
         final AbstractApplicationContext context = 
                         new ClassPathXmlApplicationContext(new String[] {WINDOW_CONFIG_XML});
         
-        boolean runSwipe = true;
+        boolean runSwipe = false;
         
         if (runSwipe == true) {
             try {

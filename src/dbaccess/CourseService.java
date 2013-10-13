@@ -17,7 +17,7 @@ public class CourseService {
      */
     public CourseService() {
         I_DBAccessor db = new DBAccessor();
-        courseDAO = new CourseDAO();
+        courseDAO = new CourseDAO(db);
     }
     
     
@@ -69,5 +69,18 @@ public class CourseService {
     }
     
     
-
+    /**
+     *
+     * @param args
+     * @throws DataAccessException
+     */
+    public static void main(String[] args) throws DataAccessException {
+        
+        CourseService cs = new CourseService();
+        Course course = new Course();
+        
+        System.out.println(cs.getAllCourses());
+        
+    }
+    
 }
