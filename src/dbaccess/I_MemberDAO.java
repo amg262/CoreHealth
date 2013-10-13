@@ -42,6 +42,14 @@ public interface I_MemberDAO {
      */
     public abstract List<Member> retrieveMemberByKeyword(String keyword) throws DataAccessException;
     
+    
+    /**
+     *
+     * @param keyword
+     * @return
+     * @throws DataAccessException
+     */
+    public abstract List<MemberDTO> retreiveMemberInfo(String keyword) throws DataAccessException;
     /**
      *
      * @param member

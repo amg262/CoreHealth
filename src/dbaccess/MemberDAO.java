@@ -2,6 +2,7 @@
 package dbaccess;
 
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -170,6 +171,69 @@ public class MemberDAO implements I_MemberDAO {
      * @throws DataAccessException
      */
     @Override
+    public List<MemberDTO> retreiveMemberInfo(String keyword) throws DataAccessException {
+        final String GET_MEMBER_INFO = 
+                "select member.id, member.last_name, member.first_name, " +
+                " membership_type.type, membership_payment.frequency, " +
+                " free_session.condition, membership_status.status " +
+                " from member join membership_status on member.mem_status = membership_status.id " +
+                " join membership_payment on member.mem_payment = membership_payment.id " +
+                " join membership_type on member.mem_type = membership_type.id " +
+                " join free_session on member.free_session = free_session.id " +
+                " WHERE member.id = " + keyword +
+                " order by member.id ";
+         
+        List<Map> rawData = new ArrayList<>();
+        List<MemberDTO> records = new ArrayList<>();
+        
+        
+        try {
+            rawData = db.retrieveRecords(GET_MEMBER_INFO, true);
+        } catch (SQLException sqle){
+            throw new DataAccessException (sqle.getMessage(), sqle);
+        } catch (Exception e){
+            throw new DataAccessException (e.getMessage(), e);
+        }
+        MemberDTO member = null;
+        
+        for (Map map : rawData){
+            member = new MemberDTO();
+            
+            String id = map.get("id").toString();
+            member.setMemberId(new Integer(id));
+            
+            String lastName = map.get("last_name").toString();
+            member.setLastName(lastName);
+            
+            String firstName = map.get("first_name").toString();
+            member.setFirstName(firstName);
+            
+            String memType = map.get("type").toString();
+            member.setMemType(memType);
+            
+            String memPayment = map.get("frequency").toString();
+            member.setMemPayment(memPayment);
+            
+            String freeSession = map.get("condition").toString();
+            member.setFreeSession(freeSession);
+            
+            String memStatus = map.get("status").toString();
+            member.setMemStatus(memStatus);
+
+            
+            records.add(member);
+                    
+        }
+        return records;
+    }
+    
+    /**
+     *
+     * @param keyword
+     * @return
+     * @throws DataAccessException
+     */
+    @Override
     public List<Member> retrieveMemberByKeyword(String keyword) throws DataAccessException {
         
         final String GET_MEMBER_BY_KEYWORD = 
@@ -328,8 +392,9 @@ public class MemberDAO implements I_MemberDAO {
         List<Member> members = new ArrayList();
         dao.openLocalDBConnection();
         //System.out.println(dao.retrieveAllMemebers());
-        members = dao.retrieveMemberByKeyword("white");
-        System.out.println(members.toString());
+//        members = dao.retrieveMemberByKeyword("white");
+//        System.out.println(members.toString());
+        System.out.println(dao.retreiveMemberInfo("2"));
         
         
     }
