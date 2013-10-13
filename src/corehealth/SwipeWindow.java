@@ -31,7 +31,6 @@ import sun.audio.AudioStream;
  * @author Andy
  */
 public class SwipeWindow extends javax.swing.JFrame {
-
     
     /**
      * Creates new form SwipeWindow
@@ -40,31 +39,27 @@ public class SwipeWindow extends javax.swing.JFrame {
         initComponents();
     }
     
-    private static void playWinning(){
+    
+    private void playWinning(){
         
-        try {
-            String winningSong = "C:\\Users\\Andy\\Desktop\\CoreHealth\\CoreHealth\\CoreHealth\\src\\sounds\\winningSound.wav";
+        AbstractApplicationContext context =
+            new ClassPathXmlApplicationContext(new String[] {"spring/mainConfig.xml"});
 
+        
+        Startup s = (Startup)context.getBean("startup");
+        
+        s.playWinning();
 
-            InputStream in = new FileInputStream(winningSong);
-            AudioStream as = new AudioStream(in);
-            AudioPlayer.player.start(as);
-        } catch (Exception e){
-            
-        }
     }
     
-    private static void playLosing(){
+    private void playLosing(){
         
-        try {
-            String losingHorn = "C:\\Users\\Andy\\Desktop\\CoreHealth\\CoreHealth\\CoreHealth\\src\\sounds\\losingHorn.wav";
+       AbstractApplicationContext context =
+            new ClassPathXmlApplicationContext(new String[] {"spring/mainConfig.xml"});
 
-            InputStream in = new FileInputStream(losingHorn);
-            AudioStream as = new AudioStream(in);
-            AudioPlayer.player.start(as);
-        } catch (Exception e){
-            
-        }
+        
+        Startup s = (Startup)context.getBean("startup");
+        s.playLosing();
     }
 
     /**
@@ -166,9 +161,6 @@ public class SwipeWindow extends javax.swing.JFrame {
         
         try {
 
-            String winningSong = "C:\\Users\\Andy\\Desktop\\CoreHealth\\CoreHealth\\CoreHealth\\src\\sounds\\winningSound.wav";
-            String losingHorn = "C:\\Users\\Andy\\Desktop\\CoreHealth\\CoreHealth\\CoreHealth\\src\\sounds\\losingHorn.wav";
-            
             final String WEL = "Welcome to Core Health!";
             final Icon muscle = new ImageIcon("icons/muscle.jpg");
             final String MAIN_CONFIG = "spring/mainConfig.xml";

@@ -8,11 +8,15 @@ import dbaccess.CourseService;
 import dbaccess.DataAccessException;
 import dbaccess.Member;
 import dbaccess.MemberService;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 /**
  *
@@ -30,6 +34,27 @@ public class CourseWindow extends javax.swing.JFrame {
      */
     public CourseWindow() {
         initComponents();
+    }
+    
+    private void playWinning(){
+        
+        AbstractApplicationContext context =
+            new ClassPathXmlApplicationContext(new String[] {"spring/mainConfig.xml"});
+
+        
+        Startup s = (Startup)context.getBean("startup");
+        
+        s.playWinning();
+
+    }
+    
+    private void playLosing(){
+        
+       AbstractApplicationContext context =
+            new ClassPathXmlApplicationContext(new String[] {"spring/mainConfig.xml"});
+
+        Startup s = (Startup)context.getBean("startup");
+        s.playLosing();
     }
 
     /**
@@ -194,20 +219,18 @@ public class CourseWindow extends javax.swing.JFrame {
             if (member == null || sMemberId == null ||
                     course == null || sCourseId == null){
                 
+                playLosing();
                 throw new NullPointerException();
                 
             } else {
                 
             member = memServ.getMemberById(sMemberId);
             course = courseServ.getCourseById(sCourseId);
-            
             courseMem.setMemberId(memberId);
             courseMem.setCourseId(courseId);
-            
-            
             courseMemServ.saveCourseMember(courseMem);
 
-
+                playWinning();
                 JOptionPane.showMessageDialog(this, "Thank you, " + member.getFirstName() +
                         " " + member.getLastName() +
                         "\nCourse: " + course.getTitle() +
@@ -215,18 +238,21 @@ public class CourseWindow extends javax.swing.JFrame {
                         "\nTime: " + course.getStartTime() + "  to  " + course.getEndTime() 
                         , TY , JOptionPane.PLAIN_MESSAGE, muscle);
             
-            System.out.println(courseMem.toString());
         
             }
             
         
         } catch (NullPointerException npe) {
+            playLosing();
             JOptionPane.showMessageDialog(this, "Invalid. Please See An Employee", null, JOptionPane.WARNING_MESSAGE);
         } catch (IllegalArgumentException iae) {
+            playLosing();
             JOptionPane.showMessageDialog(this, iae.getMessage(), null, JOptionPane.WARNING_MESSAGE);
         } catch (DataAccessException dae) {
+            playLosing();
             JOptionPane.showMessageDialog(this, dae.getMessage(), null, JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
+            playLosing();
             JOptionPane.showMessageDialog(this, e.getMessage(), null, JOptionPane.WARNING_MESSAGE);
         }
         

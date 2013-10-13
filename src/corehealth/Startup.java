@@ -2,6 +2,8 @@
 package corehealth;
 
 import java.awt.Image;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -9,12 +11,15 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 /**
  *
  * @author Andrew Gunn | amgunn1@hotmail.com
  */
 public class Startup {
+    
     /**
      * @param args the command line arguments
      */
@@ -51,6 +56,36 @@ public class Startup {
             } catch (Exception e){
                 throw e;
             }
+        }
+    }
+    
+    /**
+     *
+     */
+    public void playWinning(){
+        try {
+            Startup s = new Startup();
+            String url = "C:\\Users\\Andy\\Desktop\\CoreHealth\\CoreHealth\\CoreHealth\\src\\sounds\\winningSound.wav";
+            InputStream in = new FileInputStream(url);
+            AudioStream as = new AudioStream(in);
+            AudioPlayer.player.start(as);
+        } catch (Exception e){
+            
+        }
+    }
+    
+    /**
+     *
+     */
+    public void playLosing(){
+        try {
+            Startup s = new Startup();
+            String url = "C:\\Users\\Andy\\Desktop\\CoreHealth\\CoreHealth\\CoreHealth\\src\\sounds\\losingHorn.wav";
+            InputStream in = new FileInputStream(url);
+            AudioStream as = new AudioStream(in);
+            AudioPlayer.player.start(as);
+        } catch (Exception e){
+            
         }
     }
 }

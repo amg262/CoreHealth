@@ -21,4 +21,6 @@
     <bean id="memberService" class="dbaccess.MemberService" />
     <bean id="courseService" class="dbaccess.CourseService" />
     <bean id="courseMemberService" class="dbaccess.CourseMemberService" />
+    
+    <bean id="startup" class="corehealth.Startup" />
 </beans>
