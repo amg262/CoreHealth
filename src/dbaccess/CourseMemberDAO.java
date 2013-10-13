@@ -158,7 +158,7 @@ public class CourseMemberDAO implements I_CourseMemberDAO {
         this.openLocalDBConnection();
         
         try {
-            db.deleteRecords("course", "id", courseMember.getMemberId(), true);
+            db.deleteRecords("course_member", "member_id", courseMember.getMemberId(), true);
         } catch (SQLException sqle){
             throw new DataAccessException(sqle.getMessage(), sqle);
         } catch (Exception e) {
@@ -178,9 +178,9 @@ public class CourseMemberDAO implements I_CourseMemberDAO {
         CourseMember cm = new CourseMember();
         
         dao.openLocalDBConnection();
-        cm.setMemberId(1);
-        cm.setCourseId(9);
-        dao.saveCourseMember(cm);
+        cm.setMemberId(4);
+        cm.setCourseId(6);
+        dao.deleteCourseMember(cm);
         
         System.out.println(cm.toString());
         //System.out.println(dao.retrieveAllCourseMembers());

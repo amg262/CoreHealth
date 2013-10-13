@@ -158,7 +158,7 @@ public class CourseWindow extends javax.swing.JFrame {
  
         try {
 
-            final String WEL = "Welcome to Core Health!";
+            final String TY = "Thank You!";
             final Icon muscle = new ImageIcon("icons/muscle.jpg");
             final String MAIN_CONFIG = "spring/mainConfig.xml";
             
@@ -200,13 +200,21 @@ public class CourseWindow extends javax.swing.JFrame {
                 
             member = memServ.getMemberById(sMemberId);
             course = courseServ.getCourseById(sCourseId);
-
-
-                JOptionPane.showMessageDialog(this, "Welcome Back,  " +
-                        member.getFirstName() + " " + member.getLastName() +
-                        "!" , WEL , JOptionPane.PLAIN_MESSAGE, muscle);
             
-            System.out.println(courseServ.getCourseById(sCourseId));
+            courseMem.setMemberId(memberId);
+            courseMem.setCourseId(courseId);
+            
+            
+            courseMemServ.saveCourseMember(courseMem);
+
+
+                JOptionPane.showMessageDialog(this, "Thank you " + member.getFirstName() +
+                        "\nCourse: " + course.getTitle() +
+                        "\nDates: " + course.getStartDate() +  "  to  " + course.getEndDate() +
+                        "\nTime: " + course.getStartTime() + "  to  " + course.getEndTime() 
+                        , TY , JOptionPane.PLAIN_MESSAGE, muscle);
+            
+            System.out.println(courseMem.toString());
         
             }
             

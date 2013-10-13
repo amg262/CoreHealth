@@ -179,10 +179,10 @@ public class SwipeWindow extends javax.swing.JFrame {
         
         txtMemberId.setText(null);
     }//GEN-LAST:event_btnClearMemberIdActionPerformed
-//
-//    /**
-//     * @param args the command line arguments
-//     */
+
+    /**
+     * @param args the command line arguments
+     */
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
