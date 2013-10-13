@@ -1,6 +1,7 @@
 
 package dbaccess;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +43,16 @@ public class MemberService {
     
     /**
      *
+     * @param keyword
+     * @return
+     * @throws DataAccessException
+     */
+    public List<MemberDTO> getMemberInfo(String keyword) throws DataAccessException {
+        return memberDAO.retreiveMemberInfo(keyword);
+    }
+    
+    /**
+     *
      * @param member
      * @throws DataAccessException
      */
@@ -58,4 +69,10 @@ public class MemberService {
         memberDAO.deleteMember(member);
     }
     
+    
+    public static void main(String[] args) throws DataAccessException {
+        MemberService ms = new MemberService();
+        
+        System.out.println(ms.getMemberInfo("a").toString());
+    }
 }
